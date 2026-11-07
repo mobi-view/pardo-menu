@@ -45,7 +45,7 @@ export type Item = {
   price: number;
   sort_order: number;
   item_images: ItemImage[];
-  item_addons: ItemAddon[];
+  item_addons?: ItemAddon[];
 };
 
 

@@ -169,3 +169,39 @@ values (
   'مكونات طازجة. نكهات جريئة. في أي وقت، بطريقتكم.',
   'Fresh ingredients. Bold flavors. Anytime, your way.'
 );
+
+
+
+
+drop table if exists public.item_option_groups;
+drop table if exists public.option_group_choices;
+drop table if exists public.option_groups;
+
+create table public.extra_groups (
+  id uuid primary key default gen_random_uuid(),
+  name_ar text not null check (length(trim(name_ar)) > 0),
+  name_en text,
+  sort_order int not null default 0,
+  created_at timestamptz not null default now()
+);
+
+create table public.extra_group_options (
+  id uuid primary key default gen_random_uuid(),
+  group_id uuid not null references public.extra_groups(id) on delete cascade,
+  name_ar text not null check (length(trim(name_ar)) > 0),
+  name_en text,
+  price numeric(10,2) not null default 0 check (price >= 0),
+  sort_order int not null default 0,
+  is_active boolean not null default true
+);
+
+create index extra_group_options_group_idx on public.extra_group_options (group_id, sort_order);
+
+alter table public.extra_groups enable row level security;
+alter table public.extra_group_options enable row level security;
+
+create policy "admin manage extra groups" on public.extra_groups
+for all to authenticated using (public.is_admin()) with check (public.is_admin());
+
+create policy "admin manage extra group options" on public.extra_group_options
+for all to authenticated using (public.is_admin()) with check (public.is_admin());
