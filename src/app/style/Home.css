@@ -183,6 +183,21 @@
     transform: translateY(-3px);
 }
 
+.landing-menu-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(10px, 2vw, 20px);
+}
+
+.landing-menu-button-arabic {
+    font-family: var(--font-landing-arabic), "Tajawal", sans-serif;
+    font-weight: 700;
+    text-transform: none;
+    letter-spacing: 0;
+}
+
 @media (max-height: 560px) and (orientation: landscape) {
     .landing-content {
         gap: 18px;

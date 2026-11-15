@@ -20,10 +20,8 @@ export default function ItemCard({
     imageUrl,
 }: ItemCardProps) {
     return (
-        
-        <div className="item-card">
-            
-            {imageUrl && <img src={imageUrl} alt={name} />}
+        <Link href={href} className="item-card">
+            {imageUrl && <img src={imageUrl} alt={name}  />}
             <div className="item-info">
                 <h2>{name}</h2>
                 <p>{description}</p>
@@ -31,11 +29,9 @@ export default function ItemCard({
                     <span className="item-price">
                         {Number(price).toFixed(2)} <small>{currency}</small>
                     </span>
-                    <Link href={href} className="item-details">
-                        {detailsLabel}
-                    </Link>
+                    <span className="item-details">{detailsLabel}</span>
                 </div>
             </div>
-        </div>
+        </Link>
     );
 }

@@ -48,7 +48,7 @@ const socialLinks = [
 ];
 
 export default function Landing() {
-    const { t } = useLanguage();
+   const { setLang } = useLanguage();
 
     return (
         <main className={`landing ${titleFont.variable} ${scriptFont.variable} ${arabicFont.variable}`}>
@@ -75,10 +75,28 @@ export default function Landing() {
                     </p>
                 </div>
 
-                <Link href="/menu" className="landing-menu-button">
-                    <FaListUl aria-hidden="true" />
-                    <span>{t.title}</span>
-                </Link>
+                <div className="landing-menu-buttons">
+
+                    
+                    <Link
+                        href="/menu"
+                        className="landing-menu-button"
+                        onClick={() => setLang("en")}
+                    >
+                        <FaListUl aria-hidden="true" />
+                        <span>OUR MENU</span>
+                    </Link>
+
+                    <Link
+                        href="/menu"
+                        className="landing-menu-button landing-menu-button-arabic"
+                        lang="ar"
+                        onClick={() => setLang("ar")}
+                    >
+                        <FaListUl aria-hidden="true" />
+                        <span>قائمة الطعام</span>
+                    </Link>
+                </div>
 
                 <div className="landing-socials">
                     {socialLinks.map((social) => (
